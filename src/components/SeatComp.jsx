@@ -35,8 +35,8 @@ const SeatComp = ({ seat, onClick, selectedSeats, bookedSeats }) => {
               !bookedSeats.includes(`${seat.seatRow + item.seatNumber}`) &&
               onClick(seat.seatRow, item)
             }
-            className={`w-8 h-8 border m-1 flex justify-center items-center rounded-t-lg
-              ${item.seatNumber === 7 ? "ml-8" : ""}
+            className={`w-7 h-7 border m-1 flex justify-center items-center rounded-t-lg mx-2
+              ${item.seatNumber === 7 ? "ml-10" : ""}
               ${getSeatClasses(item)}
             `}
           >

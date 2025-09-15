@@ -33,7 +33,7 @@ const Legend = () => {
           key={ind}
           className="flex justify-center items-center gap-x-1 text-sm"
         >
-          <div className={`${item.classes} w-6 h-6 rounded-t-lg`}></div>
+          <div className={`${item.classes} w-5 h-5 rounded-t-lg`}></div>
           <span>{item.label}</span>
           {item.price && <span>({item.price})</span>}
         </div>

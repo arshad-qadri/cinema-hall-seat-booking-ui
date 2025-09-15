@@ -68,7 +68,8 @@ const SeatBooking = () => {
         </p>
 
         {/* Screen */}
-        <div className="h-4 bg-gray-400 w-full rounded-2xl mt-6 mb-2" />
+        <div className="h-4 w-full rounded-2xl mt-6 mb-2 bg-gradient-to-r from-gray-400 via-gray-300 to-gray-400" />
+
         <h5 className="uppercase text-center  text-gray-600">screen</h5>
 
         {/* Seats */}
@@ -91,17 +92,31 @@ const SeatBooking = () => {
           <h1 className="font-semibold">Booking Summary</h1>
           {selectedSeats.length > 0 ? (
             <div>
-              <div className="text-sm">
-                Selected seats:{" "}
-                {selectedSeats.map((s, index) => (
-                  <span key={s} className="ml-1">
-                    {s}
-                    {index === selectedSeats.length - 1 ? "" : ","}
-                  </span>
-                ))}
+              <div className="text-sm flex justify-start items-center flex-wrap">
+                <span>Selected seats: </span>
+                {selectedSeats
+                  .sort((a, b) => {
+                    const rowA = a[0]; // first character (row letter)
+                    const rowB = b[0];
+                    const numA = parseInt(a.slice(1), 10); // number part
+                    const numB = parseInt(b.slice(1), 10);
+
+                    if (rowA === rowB) {
+                      return numA - numB; // same row → sort by number
+                    }
+                    return rowA.localeCompare(rowB); // different row → sort alphabetically
+                  })
+                  .map((s, index) => (
+                    <span key={s} className="ml-1">
+                      {s}
+                      {index === selectedSeats.length - 1 ? "" : ","}
+                    </span>
+                  ))}
               </div>
               <div className="text-sm">Total: ₹{total}</div>
             </div>
+          ) : bookedSeats.length === 96 ? (
+            <p className="text-sm text-gray-500">House Full </p>
           ) : (
             <p className="text-sm text-gray-500">No seats selected</p>
           )}
